@@ -21,14 +21,14 @@
          * @param {string} credentials.username     Username
          * @param {string} credentials.password     Password
          * @param {Object} credentials.airline      Airline Information
-         * @param {boolean} credentials.rememberMe  Indicate if user should be remember
+         * @param {number} credentials.rememberMe  Indicate if user should be remember
          */
         function login(credentials) {
             return $http.post(API.url + 'session.json', {
                 username: credentials.username,
                 airline: credentials.airline ? credentials.airline.display_name : '',
                 password: credentials.password,
-                remember_me: credentials.rememberMe
+                remember_me: credentials.rememberMe ? 1 : 0
             }, {
                 headers: {
                     'X-API-CALL': true
