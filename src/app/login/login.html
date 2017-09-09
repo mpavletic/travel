@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Iniciar Sesión</h3>
+            </div>
+
+            <div class="panel-body">
+                <form name="vm.form" ng-submit="vm.login()" novalidate>
+                    <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.username.$error.required}">
+                        <label for="username" class="control-label">Usuario</label>
+                        <input type="text" name="username" class="form-control" required ng-model="vm.credentials.username" />
+
+                        <span class="help-block" ng-show="vm.form.$submitted && vm.form.username.$error.required">
+                            El usuario es obligatorio
+                        </span>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.password.$error.required}">
+                        <label for="password" class="control-label">Contraseña</label>
+                        <input type="password" name="password" class="form-control" required ng-model="vm.credentials.password" />
+
+                        <span class="help-block" ng-show="vm.form.$submitted && vm.form.password.$error.required">
+                            La contraseña es obligatoria
+                        </span>
+                    </div>
+
+                    <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.airline.$error.required}">
+                        <label for="airline" class="control-label">Areolinea</label>
+                        <select name="airline" required ng-options="airline as airline.display_name for airline in vm.airlines track by airline.code"
+                            ng-model="vm.credentials.airline">
+                        </select>
+
+                        <span class="help-block" ng-show="vm.form.$submitted && vm.form.airline.$error.required">
+                            Debe seleccionar una aerolinea
+                        </span>
+                    </div>
+
+                    <div class="checkbox">
+                        <label for="remember_me">
+                            <input type="checkbox" name="remember_me" ng-model="vm.credentials.rememberMe" />
+                            Recordarme
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block" ng-disabled="vm.serviceCalled">
+                        Iniciar Sesión
+                    </button>
+                </form>
+            </div><!-- end panel body -->
+        </div><!-- end panel default -->
+
+        <div class="alert alert-danger" ng-show="vm.invalidLogin && !vm.serviceCalled">
+            {{vm.errorMsg}}
+        </div>
+    </div><!-- end column --> 
+</div><!-- end row -->
