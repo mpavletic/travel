@@ -5,9 +5,9 @@
         .module('app')
         .controller('LoginController', LoginController);
 
-    LoginController.$inject = ['$scope', 'AirlineService', 'LoginService'];
+    LoginController.$inject = ['$scope', '$state', 'AirlineService', 'LoginService'];
 
-    function LoginController($scope, AirlineService, LoginService) {
+    function LoginController($scope, $state, AirlineService, LoginService) {
         var vm = this;
 
         vm.credentials = {
@@ -37,7 +37,7 @@
                 vm.serviceCalled = true;
                 
                 LoginService.login(vm.credentials).then(function(payload) {
-                    console.log(payload);
+                    $state.go('hotels');
                 }).catch(function(error) {
                     vm.invalidLogin = true;
                     vm.errorMsg = error.data && error.data.error ? error.data.error : '';
