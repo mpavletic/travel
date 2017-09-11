@@ -1,9 +1,36 @@
+<!-- Fixed navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>            
+            <a class="navbar-brand" href="#">TravelApp</a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a ui-sref="hotels">Hotels</a>
+                </li>            
+            </ul>
+            
+            <button type="button" class="btn btn-default navbar-btn navbar-right" ng-click="vm.logout()">
+                <span class="glyphicon glyphicon-log-out"></span>
+            </button>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
 <div class="row">
-    <div class="col-md-12">
-        <form name="vm.form" novalidate class="well" ng-submit="vm.searchHotels()">
+    <div class="col-md-8 col-md-offset-2">
+        <form name="vm.searchForm" novalidate class="well" ng-submit="vm.searchHotels()">
             <div class="row">                
                 <div class="col-md-3">
-                    <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.checkin.$error.required}">
+                    <div class="form-group" ng-class="{'has-error': vm.searchForm.$submitted && vm.searchForm.checkin.$error.required}">
                         <label for="checkin" class="control-label">
                             Checkin
                         </label>
@@ -17,14 +44,14 @@
                             </span>
                         </div>
                             
-                        <span class="help-block" ng-show="vm.form.$submitted && vm.form.checkin.$error.required">
+                        <span class="help-block" ng-show="vm.searchForm.$submitted && vm.searchForm.checkin.$error.required">
                             Checkin date is required
                         </span>
                     </div>
                 </div>
                     
                 <div class="col-md-3">
-                    <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.checkout.$error.required}">
+                    <div class="form-group" ng-class="{'has-error': vm.searchForm.$submitted && vm.searchForm.checkout.$error.required}">
                         <label for="checkout" class="control-label">
                             Checkout
                         </label>
@@ -38,7 +65,7 @@
                             </span>
                         </div>
                             
-                        <span class="help-block" ng-show="vm.form.$submitted && vm.form.checkout.$error.required">
+                        <span class="help-block" ng-show="vm.searchForm.$submitted && vm.searchForm.checkout.$error.required">
                             Checkout date is required
                         </span>
                     </div>
@@ -63,13 +90,13 @@
                 </div>
             </div>
 
-            <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.destination.$error.required}">
+            <div class="form-group" ng-class="{'has-error': vm.searchForm.$submitted && vm.searchForm.destination.$error.required}">
                 <label for="destination" class="control-label">
                     Destination
                 </label>
                 <input type="text" name="destination" class="form-control" ng-model="vm.data.destination" required />
 
-                <span class="help-block" ng-show="vm.form.$submitted && vm.form.destination.$error.required">
+                <span class="help-block" ng-show="vm.searchForm.$submitted && vm.searchForm.destination.$error.required">
                     Destination is required
                 </span>
             </div>
@@ -88,7 +115,7 @@
                 </li>
             </ul>
 
-            <p ng-show="vm.hotels.length === 0 && vm.form.$valid && vm.form.$submitted" class="alert alert-info">
+            <p ng-show="vm.hotels.length === 0 && vm.searchForm.$valid && vm.searchForm.$submitted" class="alert alert-info">
                 There is no hotels matching your search
             </p>
         </section>

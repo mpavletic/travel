@@ -5,8 +5,8 @@
         .module('app')
         .controller('HotelListController', HotelListController);
 
-    HotelListController.$inject = ['HotelListService'];
-    function HotelListController(HotelListService) {
+    HotelListController.$inject = ['$cookies', '$state', 'HotelListService'];
+    function HotelListController($cookies, $state, HotelListService) {
         var vm = this;
 
         vm.data = {
@@ -55,16 +55,27 @@
 
         vm.searchHotels = searchHotels;
 
+        vm.logout = logout;
+
         function onInit() {
             console.log('Initialized');
         }
 
+        /**
+         * Set opened property to true to display datepicker popup
+         * 
+         * @param {Object} popup            Popup Object Information
+         * @param {boolean} popup.opened    Datepicker popup is opened
+         */
         function openPopup(popup) {
             popup.opened = true;
         }
 
+        /**
+         * Request to search service if entered information for search is valid.
+         */
         function searchHotels() {
-            if (!vm.form.$valid) {
+            if (!vm.searchForm.$valid) {
                 return false;
             } else {
                 vm.data.perPage = vm.pagination.perPage;
@@ -76,6 +87,19 @@
                     console.log(error);
                 });
             }
+        }
+
+        /**
+         * Clear cookies and redirect to login state.
+         */
+        function logout() {
+            var keys = $cookies.getAll();
+
+            angular.forEach(function(value, key) {
+                $cookies.remove(key);
+            });
+
+            $state.go('app');
         }
     }
 })();
