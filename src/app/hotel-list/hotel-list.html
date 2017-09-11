@@ -1,0 +1,96 @@
+<div class="row">
+    <div class="col-md-12">
+        <form name="vm.form" novalidate class="well" ng-submit="vm.searchHotels()">
+            <div class="row">                
+                <div class="col-md-3">
+                    <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.checkin.$error.required}">
+                        <label for="checkin" class="control-label">
+                            Checkin
+                        </label>
+                        
+                        <div class="input-group">
+                            <input type="text" name="checkin" class="form-control" uib-datepicker-popup ng-model="vm.data.checkin" is-open="vm.checkinPopup.opened" datepicker-options="vm.datePickerOptions" ng-model-options="vm.datepickerModelOpts" show-button-bar="false" required />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="vm.openPopup(vm.checkinPopup)">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </span>
+                        </div>
+                            
+                        <span class="help-block" ng-show="vm.form.$submitted && vm.form.checkin.$error.required">
+                            Checkin date is required
+                        </span>
+                    </div>
+                </div>
+                    
+                <div class="col-md-3">
+                    <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.checkout.$error.required}">
+                        <label for="checkout" class="control-label">
+                            Checkout
+                        </label>
+                        
+                        <div class="input-group">
+                            <input type="text" name="checkout" class="form-control" uib-datepicker-popup ng-model="vm.data.checkout" is-open="vm.checkoutPopup.opened" datepicker-options="vm.datePickerOptions" ng-model-options="vm.datepickerModelOpts" show-button-bar="false" required />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="vm.openPopup(vm.checkoutPopup)">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </button>
+                            </span>
+                        </div>
+                            
+                        <span class="help-block" ng-show="vm.form.$submitted && vm.form.checkout.$error.required">
+                            Checkout date is required
+                        </span>
+                    </div>
+                </div>
+                    
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="guests" class="control-label">
+                            Guests
+                        </label>
+                        <input type="number" name="guests" class="form-control" ng-model="vm.data.guests" min="1" />
+                    </div>
+                </div>
+            
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="rooms" class="control-label">
+                            Rooms
+                        </label>
+                        <input type="number" name="rooms" class="form-control" ng-model="vm.data.rooms" min="1" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.destination.$error.required}">
+                <label for="destination" class="control-label">
+                    Destination
+                </label>
+                <input type="text" name="destination" class="form-control" ng-model="vm.data.destination" required />
+
+                <span class="help-block" ng-show="vm.form.$submitted && vm.form.destination.$error.required">
+                    Destination is required
+                </span>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-default" type="submit">
+                    Search
+                </button>
+            </div>
+        </form>
+
+        <section>
+            <ul class="list-group" ng-show="vm.hotels.length > 0">
+                <li class="list-group-item" ng-repeat="hotel in vm.hotels">
+                    {{hotel.name}}
+                </li>
+            </ul>
+
+            <p ng-show="vm.hotels.length === 0 && vm.form.$valid && vm.form.$submitted" class="alert alert-info">
+                There is no hotels matching your search
+            </p>
+        </section>
+    </div>
+</div>
