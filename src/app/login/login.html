@@ -2,49 +2,49 @@
     <div class="col-md-4 col-md-offset-4">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Iniciar Sesión</h3>
+                <h3 class="panel-title">Sign In</h3>
             </div>
 
             <div class="panel-body">
                 <form name="vm.form" ng-submit="vm.login()" novalidate>
                     <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.username.$error.required}">
-                        <label for="username" class="control-label">Usuario</label>
+                        <label for="username" class="control-label">Username</label>
                         <input type="text" name="username" class="form-control" required ng-model="vm.credentials.username" />
 
                         <span class="help-block" ng-show="vm.form.$submitted && vm.form.username.$error.required">
-                            El usuario es obligatorio
+                            Username is required
                         </span>
                     </div>
 
                     <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.password.$error.required}">
-                        <label for="password" class="control-label">Contraseña</label>
+                        <label for="password" class="control-label">Password</label>
                         <input type="password" name="password" class="form-control" required ng-model="vm.credentials.password" />
 
                         <span class="help-block" ng-show="vm.form.$submitted && vm.form.password.$error.required">
-                            La contraseña es obligatoria
+                            Password is required
                         </span>
                     </div>
 
                     <div class="form-group" ng-class="{'has-error': vm.form.$submitted && vm.form.airline.$error.required}">
-                        <label for="airline" class="control-label">Areolinea</label>
-                        <select name="airline" required ng-options="airline as airline.display_name for airline in vm.airlines track by airline.code"
+                        <label for="airline" class="control-label">Airline</label>
+                        <select name="airline" class="form-control" required ng-options="airline as airline.display_name for airline in vm.airlines track by airline.code"
                             ng-model="vm.credentials.airline">
                         </select>
 
                         <span class="help-block" ng-show="vm.form.$submitted && vm.form.airline.$error.required">
-                            Debe seleccionar una aerolinea
+                            Airline is required
                         </span>
                     </div>
 
                     <div class="checkbox">
                         <label for="remember_me">
                             <input type="checkbox" name="remember_me" ng-model="vm.credentials.rememberMe" />
-                            Recordarme
+                            Remember me
                         </label>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-block" ng-disabled="vm.serviceCalled">
-                        Iniciar Sesión
+                        Sign In
                     </button>
                 </form>
             </div><!-- end panel body -->
